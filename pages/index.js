@@ -26,9 +26,9 @@ import {
   Progress,
 } from "@chakra-ui/react";
 
-import factory from "./campaignFactory";
-import web3 from "./web3";
-import Campaign from "./campaign";
+import factory from "../service/factory";
+import web3 from "../service/web3";
+import Campaign from "../service/campaign";
 import { ExternalLinkIcon } from "@chakra-ui/icons";
 import { FaHandshake } from "react-icons/fa";
 import { FcShare, FcDonate, FcMoneyTransfer } from "react-icons/fc";
@@ -53,13 +53,13 @@ const Feature = ({ title, text, icon }) => {
         justify={"center"}
         color={"white"}
         rounded={"full"}
-        bg={useColorModeValue("gray.100", "gray.700")}
+        bg={useColorModeValue("blue.100", "blue.700")}
         mb={1}
       >
         {icon}
       </Flex>
       <Text fontWeight={600}>{title}</Text>
-      <Text color={useColorModeValue("gray.500", "gray.200")}>{text}</Text>
+      <Text color={useColorModeValue("blue.500", "blue.200")}>{text}</Text>
     </Stack>
   );
 };
@@ -77,7 +77,7 @@ function CampaignCard({
   return (
     <NextLink href={`/campaign/${id}`}>
       <Box
-        bg={useColorModeValue("white", "gray.800")}
+        bg={useColorModeValue("white", "blue.800")}
         maxW={{ md: "sm" }}
         borderWidth="1px"
         rounded="lg"
@@ -121,9 +121,9 @@ function CampaignCard({
 
             <Tooltip
               label="Contribute"
-              bg={useColorModeValue("white", "gray.700")}
+              bg={useColorModeValue("white", "blue.700")}
               placement={"top"}
-              color={useColorModeValue("gray.800", "white")}
+              color={useColorModeValue("blue.800", "white")}
               fontSize={"1.2em"}
             >
               <chakra.a display={"flex"}>
@@ -139,7 +139,7 @@ function CampaignCard({
           </Flex>
           <Flex alignContent="center" py={2}>
             {" "}
-            <Text color={"gray.500"} pr={2}>
+            <Text color={"blue.500"} pr={2}>
               by
             </Text>{" "}
             <Heading size="base" isTruncated>
@@ -157,7 +157,7 @@ function CampaignCard({
                 <Text as="span" fontWeight={"bold"}>
                   {balance > 0
                     ? web3.utils.fromWei(balance, "ether")
-                    : "0, Trở thành người hỗ trợ chiến dịch 😄"}
+                    : "0, Ủng hộ dự án "}
                 </Text>
                 <Text
                   as="span"
@@ -173,7 +173,7 @@ function CampaignCard({
                   fontSize="lg"
                   display={balance > 0 ? "inline" : "none"}
                   fontWeight={"normal"}
-                  color={useColorModeValue("gray.500", "gray.200")}
+                  color={useColorModeValue("blue.500", "blue.200")}
                 >
                   (${getWEIPriceInUSD(ethPrice, balance)})
                 </Text>
@@ -184,7 +184,7 @@ function CampaignCard({
                 {getWEIPriceInUSD(ethPrice, target)})
               </Text>
               <Progress
-                colorScheme="teal"
+                colorScheme="purple"
                 size="sm"
                 value={web3.utils.fromWei(balance, "ether")}
                 max={web3.utils.fromWei(target, "ether")}
@@ -227,12 +227,12 @@ export default function Home({ campaigns }) {
   return (
     <div>
       <Head>
-        <title>Diều Xanh</title>
+        <title>Diều Xanh </title>
         <meta
           name="description"
-          content="Một ứng dụng kêu gọi vốn hỗ trợ cộng đồng dựa trên công nghệ Blockchain  "
+          content="Nền tảng kêu gọi vốn cộng đồng dựa trên công nghệ Blockchain"
         />
-        <link rel="icon" href="/logo.svg" />
+        <link rel="icon" href="/icons8-kite-50.png" />
       </Head>
       <main className={styles.main}>
         <Container py={{ base: "4", md: "12" }} maxW={"7xl"} align={"left"}>
@@ -240,11 +240,11 @@ export default function Home({ campaigns }) {
           <Heading
             textAlign={useBreakpointValue({ base: "left" })}
             fontFamily={"heading"}
-            color={useColorModeValue("gray.800", "white")}
+            color={useColorModeValue("blue.800", "white")}
             as="h1"
             py={4}
           >
-            <br /> Crypto & Blockchain 😄{" "}
+            Tận dụng các tính năng nổi bật của  <br /> Crypto & Blockchain 😄{" "}
           </Heading>
           <NextLink href="/campaign/new">
             <Button
@@ -252,12 +252,12 @@ export default function Home({ campaigns }) {
               fontSize={"md"}
               fontWeight={600}
               color={"white"}
-              bg={"teal.400"}
+              bg={"black.400"}
               _hover={{
-                bg: "teal.300",
+                bg: "gray.300",
               }}
             >
-              Tạo chiến dịch mới 
+              Create Campaign
             </Button>
           </NextLink>
         </Container>
@@ -265,7 +265,7 @@ export default function Home({ campaigns }) {
           <HStack spacing={2}>
             <SkeletonCircle size="4" />
             <Heading as="h2" size="lg">
-              Mở chiến dịch 
+              Các chiến dịch,dự án đang hoạt động
             </Heading>
           </HStack>
 
@@ -302,41 +302,41 @@ export default function Home({ campaigns }) {
           <HStack spacing={2}>
             <SkeletonCircle size="4" />
             <Heading as="h2" size="lg">
-              Hoạt động 
+              Hoạt động
             </Heading>
           </HStack>
           <Divider marginTop="4" />
           <SimpleGrid columns={{ base: 1, md: 3 }} spacing={10} py={8}>
             <Feature
               icon={<Icon as={FcDonate} w={10} h={10} />}
-              title={"Tạo chiến dịch gây quỹ "}
+              title={"Bắt đầu một chiến dịch"}
               text={
-                "Điền thông tin cho chiến dịch của bạn nào!"
+                "Điền đầy đủ thông tin chiến dịch bạn muốn kêu gọi"
               }
             />
             <Feature
               icon={<Icon as={FcShare} w={10} h={10} />}
-              title={"Chia sẻ chiến dịch "}
+              title={"Chia sẻ chiến dịch"}
               text={
-                "Hãy chia sẻ chiến dịch của bạn "
+                "Chia sẻ trên mọi nền tảng mạng xã hội bạn muốn để nhiều người biết đến"
               }
             />
             <Feature
               icon={<Icon as={FcMoneyTransfer} w={10} h={10} />}
-              title={"Request and Withdraw Funds"}
+              title={"Đưa ra yêu cầu rút quỹ"}
               text={
-                "The funds raised can be withdrawn directly to the recipient when 50% of the contributors approve of the Withdrawal Request."
+                "Yêu cầu hơn 50% người tham gia gây quỹ đồng ý cho tổ chức/người tạo chiến dịch rút quỹ"
               }
             />
           </SimpleGrid>
           <Heading as="h2" size="lg" mt="8">
-            Nếu có vấn đề, hãy liên hệ qua {" "}
+            Nếu có bất kì vấn đề gì, hãy liên hệ qua {" "}
             <Link
               color="teal.500"
               href="https://github.com/"
               isExternal
             >
-               Github Repo <ExternalLinkIcon mx="2px" />
+              the Github Repo <ExternalLinkIcon mx="2px" />
             </Link>{" "}
           </Heading>
           <Divider marginTop="4" />

@@ -38,7 +38,5 @@ node_modules
 coverage
 coverage.json
 typechain
+.secret
 
-#Hardhat files
-cache
-artifacts

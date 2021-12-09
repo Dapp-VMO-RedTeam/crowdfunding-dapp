@@ -26,12 +26,12 @@ export default function NavBar() {
   return (
     <Box>
       <Flex
-        color={useColorModeValue("gray.600", "white")}
+        color={useColorModeValue("blue.600", "white")}
         py={{ base: 2 }}
         px={{ base: 4 }}
         borderBottom={1}
         borderStyle={"solid"}
-        borderColor={useColorModeValue("gray.200", "gray.900")}
+        borderColor={useColorModeValue("blue.200", "blue.900")}
         align={"center"}
         pos="fixed"
         top="0"
@@ -53,7 +53,7 @@ export default function NavBar() {
             <Heading
               textAlign="left"
               fontFamily={"heading"}
-              color={useColorModeValue("blue.800", "white")}
+              color={useColorModeValue("purple.800", "white")}
               as="h2"
               size="lg"
             >
@@ -73,7 +73,7 @@ export default function NavBar() {
                   zIndex: -1,
                 }}
               >
-                <NextLink href="/">Diều xanh </NextLink>
+                <NextLink href="/">Diều Xanh</NextLink>
               </Box>
             </Heading>
           </Flex>
@@ -90,7 +90,7 @@ export default function NavBar() {
               variant={"link"}
               display={{ base: "none", md: "inline-flex" }}
             >
-              <NextLink href="/campaign/new">Bắt đầu chiến dịch mới</NextLink>
+              <NextLink href="/campaign/new">= Tạo chiến dịch =</NextLink>
             </Button>
             <Button
               fontSize={"md"}
@@ -98,7 +98,7 @@ export default function NavBar() {
               variant={"link"}
               display={{ base: "none", md: "inline-flex" }}
             >
-              <NextLink href="/#howitworks"> Hoạt động </NextLink>
+              <NextLink href="/#howitworks">= Hoạt động =</NextLink>
             </Button>
 
             {wallet.status === "connected" ? (
@@ -109,7 +109,7 @@ export default function NavBar() {
                 <MenuList>
                   <MenuItem onClick={() => wallet.reset()}>
                     {" "}
-                    Ngắt liên kết ví {" "}
+                    Ngắt kết nối ví {" "}
                   </MenuItem>
                 </MenuList>
               </Menu>
@@ -120,14 +120,14 @@ export default function NavBar() {
                   fontSize={"md"}
                   fontWeight={600}
                   color={"white"}
-                  bg={"teal.400"}
+                  bg={"blue.400"}
                   href={"#"}
                   _hover={{
-                    bg: "teal.300",
+                    bg: "blue.300",
                   }}
                   onClick={() => wallet.connect()}
                 >
-                  Liên kết ví {" "}
+                  Kết nối ví{" "}
                 </Button>
               </div>
             )}

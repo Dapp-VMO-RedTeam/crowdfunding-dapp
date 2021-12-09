@@ -42,8 +42,8 @@ const SocialButton = ({ children, label, href }) => {
 export default function Footer() {
   return (
     <Box
-      bg={useColorModeValue("gray.50", "gray.900")}
-      color={useColorModeValue("gray.700", "gray.200")}
+      bg={useColorModeValue("blue.50", "blue.900")}
+      color={useColorModeValue("black.700", "black.200")}
     >
       <Container
         as={Stack}
@@ -76,21 +76,21 @@ export default function Footer() {
               zIndex: -1,
             }}
           >
-            <NextLink href="/">Diều Xanh </NextLink>
+            <NextLink href="/">Diều xanh</NextLink>
           </Box>
         </Heading>
         <Stack direction={"row"} spacing={6}>
           <NextLink href="/">Home</NextLink>
           <Link
             href={
-              ""
+              "https://github.com/"
             }
             isExternal
           >
             Github
           </Link>
-          <Link href={"mailto:phanthanh.trang.200@gmail.com"} isExternal>
-            Contact
+          <Link href={"mailto:phanthanh.trang200@gmail.com"} isExternal>
+            Liên hệ
           </Link>
         </Stack>
       </Container>
@@ -109,15 +109,15 @@ export default function Footer() {
           justify={{ base: "center", md: "space-between" }}
           align={{ base: "center", md: "center" }}
         >
-          <Text>Vì một thế giới </Text>
+          
           <Stack direction={"row"} spacing={6}>
-            <SocialButton label={"Website"} href={"https://google.com/"}>
+            <SocialButton label={"Website"} href={"https://google.com"}>
               {" "}
               <FaGlobe />
             </SocialButton>
             <SocialButton
               label={"Twitter"}
-              href={"https://twitter.com"}
+              href={"https://twitter.com/"}
             >
               <FaTwitter />
             </SocialButton>
