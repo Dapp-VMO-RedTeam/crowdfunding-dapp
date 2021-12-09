@@ -109,7 +109,7 @@ const RequestRow = ({
 
   return (
     <Tr
-      bg={ useColorModeValue("teal.100", "teal.700")}
+      bg= {useColorModeValue("teal.100", "teal.700")}
       opacity={request.complete ? "0.4" : "1"}
     >
       <Td>{id} </Td>
@@ -148,13 +148,13 @@ const RequestRow = ({
           {request.complete ? (
             <Tooltip
               label="This Request has been finalized & withdrawn to the recipient,it may then have less no of approvers"
-              bg={useColorModeValue("white", "gray.700")}
+              bg="white" 
               placement={"top"}
-              color={useColorModeValue("gray.800", "white")}
+              color= "gray.800"
               fontSize={"1em"}
             >
               <CheckCircleIcon
-                color={useColorModeValue("green.600", "green.300")}
+                color="green.600" 
               />
             </Tooltip>
           ) : (
@@ -191,13 +191,13 @@ const RequestRow = ({
         {request.complete ? (
           <Tooltip
               label="This Request has been finalized & withdrawn to the recipient,it may then have less no of approvers"
-            bg={useColorModeValue("white", "gray.700")}
+            bg= "white"
             placement={"top"}
-            color={useColorModeValue("gray.800", "white")}
+            color = "gray.800"
             fontSize={"1em"}
           >
             <CheckCircleIcon
-              color={useColorModeValue("green.600", "green.300")}
+              color= "green.600"
             />
           </Tooltip>
         ) : (
@@ -337,7 +337,7 @@ export default function Requests({
             <Flex flexDirection={{ base: "column", lg: "row" }} py={4}>
               <Box py="2" pr="2">
                 <Heading
-                  textAlign={useBreakpointValue({ base: "left" })}
+                  textAlign= "left"
                   fontFamily={"heading"}
                   color={useColorModeValue("gray.800", "white")}
                   as="h3"
