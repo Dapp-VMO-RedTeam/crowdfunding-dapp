@@ -109,7 +109,7 @@ const RequestRow = ({
 
   return (
     <Tr
-      bg= "teal.100"
+      bg={ useColorModeValue("teal.100", "teal.700")}
       opacity={request.complete ? "0.4" : "1"}
     >
       <Td>{id} </Td>
@@ -135,26 +135,26 @@ const RequestRow = ({
         <HStack spacing={2}>
           <Tooltip
             label={errorMessageApprove}
-            bg="white"
+            bg={useColorModeValue("white", "gray.700")}
             placement={"top"}
-            color="gray.800"
+            color={useColorModeValue("gray.800", "white")}
             fontSize={"1em"}
           >
             <WarningIcon
-              color="red.600"
+              color={useColorModeValue("red.600", "red.300")}
               display={errorMessageApprove ? "inline-block" : "none"}
             />
           </Tooltip>
           {request.complete ? (
             <Tooltip
               label="This Request has been finalized & withdrawn to the recipient,it may then have less no of approvers"
-              bg="white" 
+              bg={useColorModeValue("white", "gray.700")}
               placement={"top"}
-              color= "gray.800"
+              color={useColorModeValue("gray.800", "white")}
               fontSize={"1em"}
             >
               <CheckCircleIcon
-                color="green.600" 
+                color={useColorModeValue("green.600", "green.300")}
               />
             </Tooltip>
           ) : (
@@ -177,13 +177,13 @@ const RequestRow = ({
       <Td>
         <Tooltip
           label={errorMessageFinalize}
-          bg="white"
+          bg={useColorModeValue("white", "gray.700")}
           placement={"top"}
-          color="gray.800"
+          color={useColorModeValue("gray.800", "white")}
           fontSize={"1em"}
         >
           <WarningIcon
-            color="red.600"
+            color={useColorModeValue("red.600", "red.300")}
             display={errorMessageFinalize ? "inline-block" : "none"}
             mr="2"
           />
@@ -191,13 +191,13 @@ const RequestRow = ({
         {request.complete ? (
           <Tooltip
               label="This Request has been finalized & withdrawn to the recipient,it may then have less no of approvers"
-            bg= "white"
+            bg={useColorModeValue("white", "gray.700")}
             placement={"top"}
-            color = "gray.800"
+            color={useColorModeValue("gray.800", "white")}
             fontSize={"1em"}
           >
             <CheckCircleIcon
-              color= "green.600"
+              color={useColorModeValue("green.600", "green.300")}
             />
           </Tooltip>
         ) : (
@@ -218,14 +218,14 @@ const RequestRow = ({
 
             <Tooltip
               label="This Request is ready to be Finalized because it has been approved by 50% Approvers"
-              bg="white"
+              bg={useColorModeValue("white", "gray.700")}
               placement={"top"}
-              color="gray.800"
+              color={useColorModeValue("gray.800", "white")}
               fontSize={"1.2em"}
             >
               <InfoIcon
                 as="span"
-                color="teal.800"
+                color={useColorModeValue("teal.800", "white")}
                 display={
                   readyToFinalize && !request.complete ? "inline-block" : "none"
                 }
@@ -317,7 +317,7 @@ export default function Requests({
                 as="span"
                 display={balance > 0 ? "inline" : "none"}
                 fontWeight={"normal"}
-                color="gray.500"
+                color={useColorModeValue("gray.500", "gray.200")}
               >
                 (${getWEIPriceInUSD(ETHPrice, balance)})
               </Text>
@@ -337,9 +337,9 @@ export default function Requests({
             <Flex flexDirection={{ base: "column", lg: "row" }} py={4}>
               <Box py="2" pr="2">
                 <Heading
-                  textAlign= "left"
+                  textAlign={useBreakpointValue({ base: "left" })}
                   fontFamily={"heading"}
-                  color="gray.800"
+                  color={useColorModeValue("gray.800", "white")}
                   as="h3"
                   isTruncated
                   maxW={"3xl"}
@@ -436,18 +436,19 @@ export default function Requests({
                 </Stack>
                 <Heading
                   textAlign={"center"}
-                  color="gray.800"
+                  color={useColorModeValue("gray.800", "white")}
                   as="h4"
                   size="md"
                 >
                   No Requests yet for {name} Campaign
                 </Heading>
                 <Text
-                  textAlign="center"
-                  color="gray.600"
+                  textAlign={useBreakpointValue({ base: "center" })}
+                  color={useColorModeValue("gray.600", "gray.300")}
                   fontSize="sm"
                 >
-                  Tạo 1 yêu cầu rút tiền 
+                  Create a Withdrawal Request to Withdraw funds from the
+                  Campaign😄
                 </Text>
 
                 <Button
