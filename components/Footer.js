@@ -1,15 +1,4 @@
-import {
-  Box,
-  chakra,
-  Container,
-  Link,
-  Stack,
-  Text,
-  useColorModeValue,
-  VisuallyHidden,
-  Heading,
-  useBreakpointValue,
-} from "@chakra-ui/react";
+import { Box,chakra,Container, Link,Stack, Text,useColorModeValue,VisuallyHidden,Heading,useBreakpointValue,} from "@chakra-ui/react";
 import { FaInstagram, FaTwitter, FaGithub, FaGlobe } from "react-icons/fa";
 import NextLink from "next/link";
 
@@ -24,7 +13,7 @@ const SocialButton = ({ children, label, href }) => {
       as={"a"}
       href={href}
       display={"inline-flex"}
-      alignItems={"center"}
+      alignItems={"left"}
       justifyContent={"center"}
       transition={"background 0.3s ease"}
       _hover={{
@@ -50,20 +39,20 @@ export default function Footer() {
         maxW={"6xl"}
         py={4}
         spacing={4}
-        justify={"center"}
+        justify={"left"}
         align={"center"}
       >
         <Heading
           textAlign={useBreakpointValue({ base: "center", md: "left" })}
           fontFamily={"heading"}
-          color={useColorModeValue("teal.800", "white")}
+          color={useColorModeValue("blue.800", "white")}
           as="h2"
           size="lg"
         >
           <Box
             as={"span"}
-            color={useColorModeValue("teal.400", "teal.300")}
-            position={"relative"}
+            color={useColorModeValue("blue.400", "blue.300")}
+            position={"left"}
             zIndex={10}
             _after={{
               content: '""',
@@ -71,8 +60,8 @@ export default function Footer() {
               left: 0,
               bottom: 0,
               w: "full",
-              h: "30%",
-              bg: useColorModeValue("teal.100", "teal.900"),
+              h: "50%",
+              bg: useColorModeValue("blue.100", "blue.900"),
               zIndex: -1,
             }}
           >
@@ -98,7 +87,7 @@ export default function Footer() {
       <Box
         borderTopWidth={1}
         borderStyle={"solid"}
-        borderColor={useColorModeValue("gray.200", "gray.700")}
+        borderColor={useColorModeValue("blue.200", "blue.700")}
       >
         <Container
           as={Stack}
@@ -110,9 +99,10 @@ export default function Footer() {
           align={{ base: "center", md: "center" }}
         >
           
-          <Stack direction={"row"} spacing={6}>
-            <SocialButton label={"Website"} href={"https://google.com"}>
-              {" "}
+          <Stack direction={"row"} spacing={7}>
+            <SocialButton 
+            label={"Website"} 
+            href={"https://google.com"}>
               <FaGlobe />
             </SocialButton>
             <SocialButton
@@ -121,7 +111,9 @@ export default function Footer() {
             >
               <FaTwitter />
             </SocialButton>
-            <SocialButton label={"Github"} href={"https://github.com/"}>
+            <SocialButton 
+            label={"Github"} 
+            href={"https://github.com/"}>
               <FaGithub />
             </SocialButton>
             <SocialButton
