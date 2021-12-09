@@ -327,8 +327,7 @@ export default function Requests({
             <Alert status="error" my={4}>
               <AlertIcon />
               <AlertDescription>
-                The Current Balance of the Campaign is 0, Please Contribute to
-                approve and finalize Requests.
+                Tổng thu của chiến dịch là 0. Hãy đóng góp và trở thành 1 thành viên xem xét các yêu cầu rút tiền.
               </AlertDescription>
             </Alert>
           ) : null}
@@ -345,7 +344,7 @@ export default function Requests({
                   isTruncated
                   maxW={"3xl"}
                 >
-                  Withdrawal Requests for {name} Campaign
+                 Yêu cầu rút tiền từ chiến dịch {name}
                 </Heading>
               </Box>
               <Spacer />
