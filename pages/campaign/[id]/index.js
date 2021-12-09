@@ -443,7 +443,7 @@ export default function Requests({
                   No Requests yet for {name} Campaign
                 </Heading>
                 <Text
-                  textAlign={useBreakpointValue({ base: "center" })}
+                  textAlign="center"
                   color="gray.600"
                   fontSize="sm"
                 >

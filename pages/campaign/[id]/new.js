@@ -105,7 +105,7 @@ export default function NewRequest() {
                   />
                 </FormControl>
                 <FormControl id="value">
-                  <FormLabel>Amount in Ether</FormLabel>
+                  <FormLabel>Đổi sang Ether</FormLabel>
                   <InputGroup>
                     {" "}
                     <Input
@@ -117,7 +117,7 @@ export default function NewRequest() {
                       }}
                       step="any"
                     />{" "}
-                    <InputRightAddon children="ETH" />
+                    <InputRightAddon children="ETH" />{children}
                   </InputGroup>
                   {inUSD ? (
                     <FormHelperText>
