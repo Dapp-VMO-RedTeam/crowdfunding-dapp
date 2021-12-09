@@ -41,9 +41,9 @@ import { InfoIcon, ExternalLinkIcon } from "@chakra-ui/icons";
 import NextLink from "next/link";
 import Confetti from "react-confetti";
 
-import web3 from "../../smart-contract/web3";
-import Campaign from "../../smart-contract/campaign";
-import factory from "../../smart-contract/factory";
+import web3 from "../web3";
+import Campaign from "../campaign";
+import factory from "../campaignFactory";
 
 export async function getServerSideProps({ params }) {
   const campaignId = params.id;
@@ -176,7 +176,7 @@ export default function CampaignSingle({
                 <AlertIcon />
                 <AlertDescription mr={2}>
                   {" "}
-                  Thank You for your Contribution 🙏
+                  Xin cảm ơn vì đóng góp của bạn!
                 </AlertDescription>
                 <CloseButton
                   position="absolute"
@@ -212,7 +212,7 @@ export default function CampaignSingle({
                 href={`https://rinkeby.etherscan.io/address/${id}`}
                 isExternal
               >
-                View on Rinkeby Etherscan <ExternalLinkIcon mx="2px" />
+                Xem trên Rinkeby Etherscan <ExternalLinkIcon mx="2px" />
               </Link>
               <Box mx={"auto"} w={"full"}>
                 <SimpleGrid columns={{ base: 1 }} spacing={{ base: 5 }}>
@@ -226,7 +226,7 @@ export default function CampaignSingle({
                       minimumContribution
                     )})`}
                     info={
-                      "You must contribute at least this much in Wei ( 1 ETH = 10 ^ 18 Wei) to become an approver"
+                      "Mức tối thiểu theo Wei ( 1 ETH = 10 ^ 18 Wei) để trở thành 1 Approval "
                     }
                   />
                   <StatsCard
@@ -237,7 +237,7 @@ export default function CampaignSingle({
                     }
                   />
                   <StatsCard
-                    title={"Number of Requests"}
+                    title={"Số lượgn yêu cầu "}
                     stat={requestsCount}
                     info={
                       "A request tries to withdraw money from the contract. Requests must be approved by approvers"
@@ -265,7 +265,7 @@ export default function CampaignSingle({
                   <StatLabel fontWeight={"medium"}>
                     <Text as="span" isTruncated mr={2}>
                       {" "}
-                      Campaign Balance
+                      Tổng thu 
                     </Text>
                     <Tooltip
                       label="The balance is how much money this campaign has left to

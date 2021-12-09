@@ -2,7 +2,7 @@ import Head from "next/head";
 import { useEffect, useState } from "react";
 import NextLink from "next/link";
 import styles from "../styles/Home.module.css";
-import { getETHPrice, getWEIPriceInUSD } from "../lib/getETHPrice";
+import { getETHPrice, getWEIPriceInUSD } from "../lib/convert";
 import {
   Heading,
   useBreakpointValue,
@@ -26,9 +26,9 @@ import {
   Progress,
 } from "@chakra-ui/react";
 
-import factory from "../contracts/factory";
-import web3 from "../smart-contract/web3";
-import Campaign from "../contracts/Campaign";
+import factory from "./campaignFactory";
+import web3 from "./web3";
+import Campaign from "./campaign";
 import { ExternalLinkIcon } from "@chakra-ui/icons";
 import { FaHandshake } from "react-icons/fa";
 import { FcShare, FcDonate, FcMoneyTransfer } from "react-icons/fc";
@@ -330,10 +330,10 @@ export default function Home({ campaigns }) {
             />
           </SimpleGrid>
           <Heading as="h2" size="lg" mt="8">
-            Hãy đưa các câu hỏi qua {" "}
+            Nếu có vấn đề, hãy liên hệ qua {" "}
             <Link
               color="teal.500"
-              href="https://github.com/harsh242/betterfund-crowdfunding-in-blockchain/issues"
+              href="https://github.com/"
               isExternal
             >
                Github Repo <ExternalLinkIcon mx="2px" />
