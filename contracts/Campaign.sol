@@ -42,16 +42,16 @@ contract Campaign {
       _;
   }
 
-  constructor(uint minimun, address creator,string memory  name,string memory  description,string memory  image,uint target) {
+  constructor(uint minimum, address creator,string memory  name,string memory  description,string memory  image,uint target) {
       manager = creator;
-      minimunContribution = minimun;
+      minimunContribution = minimum;
       CampaignName=name;
       CampaignDescription=description;
       imageUrl=image;
       targetToAchieve=target;
   }
 
-  function contibute() public payable {
+  function contribute() public payable {
       require(msg.value > minimunContribution );
 
       contributers.push(msg.sender);

@@ -14,10 +14,10 @@ async function main() {
   // await hre.run('compile');
 
   // We get the contract to deploy
-  const Campaign = await hre.ethers.getContractFactory("Campaign");
-  const campaign = await Campaign.deploy();
-  await campaign.deployed();
-  console.log("Campaign deployed to:", campaign.address);
+  const CampaignFactory = await hre.ethers.getContractFactory("CampaignFactory");
+  const campaignFactory = await CampaignFactory.deploy();
+  await campaignFactory.deployed();
+  console.log("Campaign deployed to:", campaignFactory.address);
 
 }
 
