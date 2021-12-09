@@ -109,11 +109,7 @@ const RequestRow = ({
 
   return (
     <Tr
-      bg={
-        readyToFinalize && !request.complete
-          ? useColorModeValue("teal.100", "teal.700")
-          : useColorModeValue("gray.100", "gray.700")
-      }
+      bg={ useColorModeValue("teal.100", "teal.700")}
       opacity={request.complete ? "0.4" : "1"}
     >
       <Td>{id} </Td>
