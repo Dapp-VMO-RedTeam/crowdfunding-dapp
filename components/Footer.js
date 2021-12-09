@@ -52,7 +52,7 @@ export default function Footer() {
           <Box
             as={"span"}
             color={useColorModeValue("blue.400", "blue.300")}
-            position={"left"}
+            position={"relative"}
             zIndex={10}
             _after={{
               content: '""',
@@ -60,7 +60,7 @@ export default function Footer() {
               left: 0,
               bottom: 0,
               w: "full",
-              h: "50%",
+              h: "20%",
               bg: useColorModeValue("blue.100", "blue.900"),
               zIndex: -1,
             }}
@@ -99,7 +99,7 @@ export default function Footer() {
           align={{ base: "center", md: "center" }}
         >
           
-          <Stack direction={"row"} spacing={7}>
+          <Stack direction={"row"} spacing={6}>
             <SocialButton 
             label={"Website"} 
             href={"https://google.com"}>
