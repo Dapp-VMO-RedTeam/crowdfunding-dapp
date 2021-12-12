@@ -5,10 +5,10 @@ Diều Xanh là một nền tảng ứng dụng gọi vốn cộng đồng  hay 
 Không giới hạn mỗi việc hỗ trợ các tổ chức từ thiện mà các nhà khởi nghiệp tìm kiếm nguồn vốn từ cộng đồng, cũng có thể tham gia và kêu gọi nguồn hỗ trợ từ các nhà hảo tâm và cộng đồng quan tâm.
 
 # Các tech stack sử dụng 
-Web3 JS
-Next JS
-Chakra-ui
-Solidity 
+Web3 JS /n
+Next JS /n
+Chakra-ui /n
+Solidity /n
 
 # Deploy smart contract lên mạng Rinkeby 
 Sử dụng Hardhat để deploy lên mạng thử nghiệm Rinkeby với Infura 
