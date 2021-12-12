@@ -35,6 +35,7 @@ import {
   CloseButton,
   FormHelperText,
   Link,
+  Table, Thead, Tr, Tbody, Th, Td
 } from "@chakra-ui/react";
 
 import { InfoIcon, ExternalLinkIcon } from "@chakra-ui/icons";
@@ -44,12 +45,14 @@ import Confetti from "react-confetti";
 import web3 from "../../service/web3";
 import Campaign from "../../service/campaign";
 import factory from "../../service/factory";
+import campaign from "../../service/campaign";
 
 export async function getServerSideProps({ params }) {
   const campaignId = params.id;
   const campaign = Campaign(campaignId);
   const summary = await campaign.methods.getSummary().call();
   const ETHPrice = await getETHPrice();
+
 
   return {
     props: {
@@ -62,11 +65,49 @@ export async function getServerSideProps({ params }) {
       name: summary[5],
       description: summary[6],
       image: summary[7],
-      target: summary[8],
+      contributorsCount: summary[8],
+      target: summary[9],
       ETHPrice,
     },
   };
 }
+
+const ContributorRow = ({
+  id,
+  contributor,
+  ETHPrice,
+}) => {
+  return (
+    <Tr>
+      <Td>{id} </Td>
+      <Td>
+        <Link
+          color="blue.500"
+          href={`https://rinkeby.etherscan.io/address/${contributor.contributorAddress}`}
+          isExternal
+        >
+          {" "}
+          {contributor.contributorAddress.substr(0, 10) + "..."}
+        </Link>
+      </Td>
+      <Td isNumeric>
+        {web3.utils.fromWei(contributor.value, "ether")}ETH ($
+        {getWEIPriceInUSD(ETHPrice, contributor.value)})
+      </Td>
+      {/* <Td>
+      <Link
+          color="blue.500"
+          href={`https://rinkeby.etherscan.io/address/${contributor.transactionHash}`}
+          isExternal
+        >
+          {" "}
+          {contributor.transactionHash.substr(0, 10) + "..."}
+        </Link>
+      </Td> */}
+
+    </Tr>
+  );
+};
 
 function StatsCard(props) {
   const { title, stat, info } = props;
@@ -120,6 +161,7 @@ export default function CampaignSingle({
   name,
   description,
   image,
+  contributorsCount,
   target,
   ETHPrice,
 }) {
@@ -129,9 +171,12 @@ export default function CampaignSingle({
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState("");
   const [amountInUSD, setAmountInUSD] = useState();
+  const [contributorsList, setContributorsList] = useState([]);
   const wallet = useWallet();
   const router = useRouter();
   const { width, height } = useWindowSize();
+  const campaign = Campaign(id);
+
   async function onSubmit(data) {
     console.log(data);
     try {
@@ -141,6 +186,7 @@ export default function CampaignSingle({
         from: accounts[0],
         value: web3.utils.toWei(data.value, "ether"),
       });
+      
       router.push(`/campaign/${id}`);
       setAmountInUSD(null);
       reset("", {
@@ -154,10 +200,31 @@ export default function CampaignSingle({
     }
   }
 
+  async function getContributors() {
+    try {
+      console.log("contributors ", contributorsCount);
+      const contributors = await Promise.all(
+        Array(parseInt(contributorsCount))
+          .fill()
+          .map((contr, index) => {
+            return campaign.methods.contributors(index).call();
+          })
+      );
+
+      setContributorsList(contributors);
+      return contributors;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  useEffect(() => {
+    getContributors();
+  }, []);
+
   return (
     <div>
       <Head>
-        <title>CHI TIẾT VỀ CHIẾN DỊCH</title>
+        <title>Chiến dịch </title>
         <meta name="description" content="Các yêu cầu rút quỹ" />
         <link rel="icon" href="/icons8-kite-50.png" />
       </Head>
@@ -176,7 +243,7 @@ export default function CampaignSingle({
                 <AlertIcon />
                 <AlertDescription mr={2}>
                   {" "}
-                  Cảm ơn vì sự hỗ trợ của bạn  🙏
+                  Cảm ơn vì sự hỗ trợ của bạn rất nhiều !
                 </AlertDescription>
                 <CloseButton
                   position="absolute"
@@ -217,7 +284,7 @@ export default function CampaignSingle({
               <Box mx={"auto"} w={"full"}>
                 <SimpleGrid columns={{ base: 1 }} spacing={{ base: 5 }}>
                   <StatsCard
-                    title={"Minimum Contribution"}
+                    title={"Mức tối thiểu"}
                     stat={`${web3.utils.fromWei(
                       minimumContribution,
                       "ether"
@@ -237,14 +304,14 @@ export default function CampaignSingle({
                     }
                   />
                   <StatsCard
-                    title={"Số kượng yêu cầu "}
+                    title={"Số lượng yêu cầu "}
                     stat={requestsCount}
                     info={
                       "Yêu cầu rút quỹ cần được thông qua với hơn 50% biểu quyết đồng ý "
                     }
                   />
                   <StatsCard
-                    title={"Số lựogn người chấp nhận yêu cầu"}
+                    title={"Số lượng người biểu quyết "}
                     stat={approversCount}
                     info={
                       "Số lượng người đã tham gia gây quỹ cho chiến dịch này "
@@ -265,7 +332,7 @@ export default function CampaignSingle({
                   <StatLabel fontWeight={"medium"}>
                     <Text as="span" isTruncated mr={2}>
                       {" "}
-                      Tổng quỹ 
+                      Tổng quỹ
                     </Text>
                     <Tooltip
                       label="Số lượng quỹ còn lại "
@@ -290,7 +357,7 @@ export default function CampaignSingle({
                       <Text as="span" fontWeight={"bold"}>
                         {balance > 0
                           ? web3.utils.fromWei(balance, "ether")
-                          : "0, Become a Donor 😄"}
+                          : "0, Hỗ trợ chiến dịch"}
                       </Text>
                       <Text
                         as="span"
@@ -313,7 +380,7 @@ export default function CampaignSingle({
                     </Box>
 
                     <Text fontSize={"md"} fontWeight="normal">
-                      target of {web3.utils.fromWei(target, "ether")} ETH ($
+                      / {web3.utils.fromWei(target, "ether")} ETH ($
                       {getWEIPriceInUSD(ETHPrice, target)})
                     </Text>
                     <Progress
@@ -345,7 +412,7 @@ export default function CampaignSingle({
                   <form onSubmit={handleSubmit(onSubmit)}>
                     <FormControl id="value">
                       <FormLabel>
-                        Số lượng ETH bạn muốn đóng góp 
+                        Số lượng ETH bạn muốn đóng góp
                       </FormLabel>
                       <InputGroup>
                         {" "}
@@ -397,7 +464,7 @@ export default function CampaignSingle({
                         <Alert status="warning" mt={4}>
                           <AlertIcon />
                           <AlertDescription mr={2}>
-                            Hãy liên kết với ví của bạn 
+                            Hãy liên kết với ví của bạn
                           </AlertDescription>
                         </Alert>
                       )}
@@ -424,13 +491,48 @@ export default function CampaignSingle({
                       boxShadow: "xl",
                     }}
                   >
-                    Xem các yêu cầu rút quỹ 
+                    Xem các yêu cầu rút quỹ
                   </Button>
                 </NextLink>
                 <Text fontSize={"sm"}>
                   * Bây giờ bạn có thể xem các yêu cầu rút quỹ của người/tổ chức chiến dịch và có quyền biểu quyết chấp nhận yêu cầu
                 </Text>
               </Stack>
+              <Stack
+                bg={useColorModeValue("white", "blue.700")}
+                boxShadow={"lg"}
+                rounded={"xl"}
+                p={{ base: 4, sm: 6, md: 8 }}
+                spacing={4}
+              >
+                <Text fontSize={"lf"}>
+                  * Lịch sử đóng góp 
+                </Text>
+                <Box overflowX="auto">
+                  <Table>
+                    <Thead>
+                      <Tr>
+                        <Th>STT</Th>
+                        <Th w="45%">Địa chỉ ví </Th>
+                        <Th isNumeric>Số lượng </Th>
+                      </Tr>
+                    </Thead>
+                    <Tbody>
+                      {contributorsList.map((contributor, index) => {
+                        return (
+                          <ContributorRow
+                            key={index}
+                            id={index + 1}
+                            contributor={contributor}
+                            ETHPrice={ETHPrice}
+                          />
+                        );
+                      })}
+                    </Tbody>
+                  </Table>
+                </Box>
+              </Stack>
+
             </Stack>
           </Container>
         </Box>

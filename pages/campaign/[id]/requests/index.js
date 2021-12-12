@@ -39,6 +39,7 @@ import {
 } from "@chakra-ui/icons";
 import web3 from "../../../../service/web3";
 import Campaign from "../../../../service/campaign";
+import factory from "../../../../service/factory";
 
 export async function getServerSideProps({ params }) {
   const campaignId = params.id;
@@ -115,7 +116,7 @@ const RequestRow = ({
       }
       opacity={request.complete ? "0.4" : "1"}
     >
-      <Td>{id} </Td>
+      <Td>{id+1} </Td>
       <Td>{request.description}</Td>
       <Td isNumeric>
         {web3.utils.fromWei(request.value, "ether")}ETH ($
@@ -150,7 +151,7 @@ const RequestRow = ({
           </Tooltip>
           {request.complete ? (
             <Tooltip
-              label="Yêu cầu này đã được biểu quyết"
+              label="Yêu cầu này đã được giải quyết "
               bg={useColorModeValue("white", "blue.700")}
               placement={"top"}
               color={useColorModeValue("blue.800", "white")}
@@ -172,7 +173,7 @@ const RequestRow = ({
               isDisabled={disabled || request.approvalCount == approversCount}
               isLoading={loadingApprove}
             >
-              Đồng ý 
+              Đồng ý
             </Button>
           )}
         </HStack>
@@ -193,7 +194,7 @@ const RequestRow = ({
         </Tooltip>
         {request.complete ? (
           <Tooltip
-              label="Yêu cầu này đac được biểu quyết"
+            label="Yêu cầu này đã được giải quyết"
             bg={useColorModeValue("white", "blue.700")}
             placement={"top"}
             color={useColorModeValue("blue.800", "white")}
@@ -294,7 +295,7 @@ export default function Requests({
               <Text fontSize={"lg"} color={"teal.400"}>
                 <ArrowBackIcon mr={2} />
                 <NextLink href={`/campaign/${campaignId}`}>
-                  Quay lại 
+                  Quay lại
                 </NextLink>
               </Text>
             </Box>
@@ -335,7 +336,7 @@ export default function Requests({
             </Alert>
           ) : null}
         </Container>
-        {requestsList.length > 0 ? (
+        {requestsList.length > 0 ? ( 
           <Container px={{ base: "4", md: "12" }} maxW={"7xl"} align={"left"}>
             <Flex flexDirection={{ base: "column", lg: "row" }} py={4}>
               <Box py="2" pr="2">
@@ -347,7 +348,7 @@ export default function Requests({
                   isTruncated
                   maxW={"3xl"}
                 >
-                  Các yêu cầu rút quỹ của chiến dịch {name} 
+                  Các yêu cầu rút quỹ của chiến dịch {name}
                 </Heading>
               </Box>
               <Spacer />
@@ -378,7 +379,7 @@ export default function Requests({
                     <Th w="30%">Chi tiết </Th>
                     <Th isNumeric>Số lượng </Th>
                     <Th maxW="12%" isTruncated>
-                      Ví người nhận 
+                      Ví người nhận
                     </Th>
                     <Th>Số lượng chấp thuận </Th>
                     <Th>Đồng ý </Th>
@@ -443,16 +444,15 @@ export default function Requests({
                   as="h4"
                   size="md"
                 >
-                  Chưa có yêu cầu nào cho chiến dịch {name} 
+                  Chưa có yêu cầu nào cho chiến dịch {name}
                 </Heading>
                 <Text
                   textAlign={useBreakpointValue({ base: "center" })}
                   color={useColorModeValue("blue.600", "blue.300")}
                   fontSize="sm"
                 >
-                  Tạo yêu cầu rút quỹ 
+                  Tạo 1 yêu cầu để rút quỹ 
                 </Text>
-
                 <Button
                   fontSize={"md"}
                   fontWeight={600}
@@ -463,7 +463,7 @@ export default function Requests({
                   }}
                 >
                   <NextLink href={`/campaign/${campaignId}/requests/new`}>
-                    Tạo yêu cầu rút quỹ 
+                    Tạo yêu cầu rút quỹ
                   </NextLink>
                 </Button>
 
@@ -477,7 +477,7 @@ export default function Requests({
                   }}
                 >
                   <NextLink href={`/campaign/${campaignId}/`}>
-                    Quay lại 
+                    Quay lại
                   </NextLink>
                 </Button>
               </SimpleGrid>

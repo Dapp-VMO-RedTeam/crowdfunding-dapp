@@ -31,7 +31,7 @@ import web3 from "../service/web3";
 import Campaign from "../service/campaign";
 import { ExternalLinkIcon } from "@chakra-ui/icons";
 import { FaHandshake } from "react-icons/fa";
-import { FcShare, FcDonate, FcMoneyTransfer } from "react-icons/fc";
+import { FcShare, FcStart, FcMoneyTransfer } from "react-icons/fc";
 
 export async function getServerSideProps(context) {
   const campaigns = await factory.methods.getDeployedCampaigns().call();
@@ -120,7 +120,7 @@ function CampaignCard({
             </Box>
 
             <Tooltip
-              label="Contribute"
+              label="Ủng hộ chiến dịch"
               bg={useColorModeValue("white", "blue.700")}
               placement={"top"}
               color={useColorModeValue("blue.800", "white")}
@@ -132,7 +132,7 @@ function CampaignCard({
                   h={7}
                   w={7}
                   alignSelf={"center"}
-                  color={"teal.400"}
+                  color={"blue.400"}
                 />{" "}
               </chakra.a>
             </Tooltip>
@@ -140,7 +140,7 @@ function CampaignCard({
           <Flex alignContent="center" py={2}>
             {" "}
             <Text color={"blue.500"} pr={2}>
-              by
+              bởi
             </Text>{" "}
             <Heading size="base" isTruncated>
               {creatorId}
@@ -154,6 +154,11 @@ function CampaignCard({
                 maxW={{ base: "	15rem", sm: "sm" }}
                 pt="2"
               >
+                <Text as="span"
+                  display={balance > 0 ? "inline" : "none"}
+                  pr={2}
+                  fontWeight={"bold"}
+                > Đạt được  {" "}</Text>
                 <Text as="span" fontWeight={"bold"}>
                   {balance > 0
                     ? web3.utils.fromWei(balance, "ether")
@@ -164,9 +169,9 @@ function CampaignCard({
                   display={balance > 0 ? "inline" : "none"}
                   pr={2}
                   fontWeight={"bold"}
-                >
+                > 
                   {" "}
-                  ETH
+                  ETH 
                 </Text>
                 <Text
                   as="span"
@@ -180,7 +185,7 @@ function CampaignCard({
               </Box>
 
               <Text fontSize={"md"} fontWeight="normal">
-                target of {web3.utils.fromWei(target, "ether")} ETH ($
+                trên tổng mục tiêu {web3.utils.fromWei(target, "ether")} ETH ($
                 {getWEIPriceInUSD(ethPrice, target)})
               </Text>
               <Progress
@@ -235,16 +240,16 @@ export default function Home({ campaigns }) {
         <link rel="icon" href="/icons8-kite-50.png" />
       </Head>
       <main className={styles.main}>
-        <Container py={{ base: "4", md: "12" }} maxW={"7xl"} align={"left"}>
+        <Container py={{ base: "4", md: "12" }} maxW={"7xl"} align={"left"} position ="relative">
           {" "}
           <Heading
-            textAlign={useBreakpointValue({ base: "left" })}
+            textAlign={useBreakpointValue({ base: "center" })}
             fontFamily={"heading"}
             color={useColorModeValue("blue.800", "white")}
             as="h1"
             py={4}
           >
-            Tận dụng các tính năng nổi bật của  <br /> Crypto & Blockchain 😄{" "}
+             Nền tảng kêu gọi vốn cộng đồng dựa trên công nghệ Blockchain{" "}
           </Heading>
           <NextLink href="/campaign/new">
             <Button
@@ -252,12 +257,12 @@ export default function Home({ campaigns }) {
               fontSize={"md"}
               fontWeight={600}
               color={"white"}
-              bg={"black.400"}
+              bg={"gray.400"}
               _hover={{
-                bg: "gray.300",
+                bg: "blue.700",
               }}
             >
-              Create Campaign
+              Tạo chiến dịch mới 
             </Button>
           </NextLink>
         </Container>
@@ -282,7 +287,7 @@ export default function Home({ campaigns }) {
                       creatorId={el[4]}
                       imageURL={el[7]}
                       id={campaigns[i]}
-                      target={el[8]}
+                      target={el[9]}
                       balance={el[1]}
                       ethPrice={ethPrice}
                     />
@@ -308,7 +313,7 @@ export default function Home({ campaigns }) {
           <Divider marginTop="4" />
           <SimpleGrid columns={{ base: 1, md: 3 }} spacing={10} py={8}>
             <Feature
-              icon={<Icon as={FcDonate} w={10} h={10} />}
+              icon={<Icon as={FcStart} w={10} h={10} />}
               title={"Bắt đầu một chiến dịch"}
               text={
                 "Điền đầy đủ thông tin chiến dịch bạn muốn kêu gọi"
@@ -336,7 +341,7 @@ export default function Home({ campaigns }) {
               href="https://github.com/"
               isExternal
             >
-              the Github Repo <ExternalLinkIcon mx="2px" />
+              Github Repo <ExternalLinkIcon mx="2px" />
             </Link>{" "}
           </Heading>
           <Divider marginTop="4" />

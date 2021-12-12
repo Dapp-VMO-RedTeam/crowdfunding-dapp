@@ -1,4 +1,4 @@
-import { Box,chakra,Container, Link,Stack, Text,useColorModeValue,VisuallyHidden,Heading,useBreakpointValue,} from "@chakra-ui/react";
+import {Box,chakra,Container,Link,Stack,useColorModeValue,VisuallyHidden,Heading,useBreakpointValue} from "@chakra-ui/react";
 import { FaInstagram, FaTwitter, FaGithub, FaGlobe } from "react-icons/fa";
 import NextLink from "next/link";
 
@@ -13,7 +13,7 @@ const SocialButton = ({ children, label, href }) => {
       as={"a"}
       href={href}
       display={"inline-flex"}
-      alignItems={"left"}
+      alignItems={"center"}
       justifyContent={"center"}
       transition={"background 0.3s ease"}
       _hover={{
@@ -31,7 +31,7 @@ const SocialButton = ({ children, label, href }) => {
 export default function Footer() {
   return (
     <Box
-      bg={useColorModeValue("blue.50", "blue.900")}
+      //bg={useColorModeValue("blue.50", "blue.900")}
       color={useColorModeValue("black.700", "black.200")}
     >
       <Container
@@ -39,7 +39,7 @@ export default function Footer() {
         maxW={"6xl"}
         py={4}
         spacing={4}
-        justify={"left"}
+        justify={"center"}
         align={"center"}
       >
         <Heading
@@ -60,12 +60,12 @@ export default function Footer() {
               left: 0,
               bottom: 0,
               w: "full",
-              h: "20%",
-              bg: useColorModeValue("blue.100", "blue.900"),
+              h: "30%",
+              bg: useColorModeValue("teal.100", "teal.900"),
               zIndex: -1,
             }}
           >
-            <NextLink href="/">Diều xanh</NextLink>
+            <NextLink href="/">DIỀU XANH</NextLink>
           </Box>
         </Heading>
         <Stack direction={"row"} spacing={6}>
@@ -87,7 +87,7 @@ export default function Footer() {
       <Box
         borderTopWidth={1}
         borderStyle={"solid"}
-        borderColor={useColorModeValue("blue.200", "blue.700")}
+        borderColor={useColorModeValue("gray.200", "gray.700")}
       >
         <Container
           as={Stack}
@@ -100,9 +100,8 @@ export default function Footer() {
         >
           
           <Stack direction={"row"} spacing={6}>
-            <SocialButton 
-            label={"Website"} 
-            href={"https://google.com"}>
+            <SocialButton label={"Website"} href={"https://google.com"}>
+              {" "}
               <FaGlobe />
             </SocialButton>
             <SocialButton
@@ -111,9 +110,7 @@ export default function Footer() {
             >
               <FaTwitter />
             </SocialButton>
-            <SocialButton 
-            label={"Github"} 
-            href={"https://github.com/"}>
+            <SocialButton label={"Github"} href={"https://github.com/"}>
               <FaGithub />
             </SocialButton>
             <SocialButton

@@ -62,7 +62,7 @@ export default function NewCampaign() {
     );
     try {
       const accounts = await web3.eth.getAccounts();
-      await factory.methods
+      const transaction = await factory.methods
         .createCampaign(
           web3.utils.toWei(data.minimumContribution, "ether"),
           data.campaignName,
@@ -73,7 +73,7 @@ export default function NewCampaign() {
         .send({
           from: accounts[0],
         });
-
+      
       router.push("/");
     } catch (err) {
       setError(err.message);
@@ -141,9 +141,9 @@ export default function NewCampaign() {
                   />
                 </FormControl>
                 <FormControl id="imageUrl">
-                  <FormLabel>Link ảnh</FormLabel>
+                  <FormLabel>Link ảnh (tùy chọn) </FormLabel>
                   <Input
-                    {...register("imageUrl", { required: true })}
+                    {...register("imageUrl", { required: false })}
                     isDisabled={isSubmitting}
                     type="url"
                   />
@@ -178,13 +178,12 @@ export default function NewCampaign() {
                 {errors.minimumContribution ||
                 errors.name ||
                 errors.description ||
-                errors.imageUrl ||
                 errors.target ? (
                   <Alert status="error">
                     <AlertIcon />
                     <AlertDescription mr={2}>
                       {" "}
-                      Mọi mục cần điền đầy đủ 
+                      Chưa điền đầy đủ các trường bắt buộc
                     </AlertDescription>
                   </Alert>
                 ) : null}

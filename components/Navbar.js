@@ -1,19 +1,4 @@
-import {
-  Box,
-  Flex,
-  Text,
-  IconButton,
-  Button,
-  Stack,
-  useColorModeValue,
-  useBreakpointValue,
-  Container,
-  Heading,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-} from "@chakra-ui/react";
+import {Box,Flex,Button,Stack,useColorModeValue,Container,Heading,Menu,MenuButton, MenuList,MenuItem} from "@chakra-ui/react";
 import { useWallet } from "use-wallet";
 
 import NextLink from "next/link";
@@ -29,9 +14,6 @@ export default function NavBar() {
         color={useColorModeValue("blue.600", "white")}
         py={{ base: 2 }}
         px={{ base: 4 }}
-        borderBottom={1}
-        borderStyle={"solid"}
-        borderColor={useColorModeValue("blue.200", "blue.900")}
         align={"center"}
         pos="fixed"
         top="0"
@@ -73,7 +55,7 @@ export default function NavBar() {
                   zIndex: -1,
                 }}
               >
-                <NextLink href="/">Diều Xanh</NextLink>
+                <NextLink href="/" img = "../"> Diều Xanh</NextLink>
               </Box>
             </Heading>
           </Flex>
